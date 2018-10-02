@@ -89,17 +89,13 @@ Formi andmed saadetakse töötlemisse th:action="@{/products?op=sel}" kontroller
  
  Iga põhiveebilehe päises on Thymeleaf fragment fragments/viga.html
  
- Kui on andmete mappimisel viga, siis moodustatakse veateatest string, mis lisatakse Modeli attribuuti "viga"
- <p/>model.addAttribute("viga", err); ja viga.html fragment kontrollib muutuja "viga olemasolu, ja kui on kontroll, siis näitab seda.
+ Kui on andmete töötlemisel või mappimisel viga, siis moodustatakse veateatest string, mis lisatakse Modeli attribuuti "viga"
+ <p/>model.addAttribute("viga", err); ja viga.html fragment kontrollib muutuja "viga olemasolu ja kui on kontroll, siis näitab seda.
  <p/>
- Et vigu ei tuleks topelt ekraanile, aiis päisesse (viga.html fragmenti) kui ka sisestuskasti alla , siis Utils.veateade(bindingResult.getFieldErrors() ei võta neid
+ Et vigu ei tuleks topelt ekraanile, siis päisesse (viga.html fragmenti) kui ka sisestuskasti alla , siis Utils.veateade(bindingResult.getFieldErrors() ei võta neid
  veateateid sisse, mis on põhjustatud annotatsioonidest<p/>
  ArrayList<String> vead = new ArrayList<String>(Arrays.asList("Size", "NotNull","NotBlank","PastOrPresent","PositiveOrZero","Max")); 
  <p/>
- 
- 
- 
- 
  
  
  if (bindingResult.hasErrors()) {
