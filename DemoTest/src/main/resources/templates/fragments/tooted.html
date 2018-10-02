@@ -1,0 +1,53 @@
+ <!-- https://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html#parameterizable-fragment-signatures -->
+ <div class="row" xmlns:th="http://www.thymeleaf.org" th:fragment="input(products)">
+ 	<div class="col-sm-12 table-responsive">
+     <table id="productTable" class="table table-striped table-hover table-sm">
+         <thead>
+             <tr>
+             	<th style="text-align:center">ID
+             	<a th:href="|/${geturl}?op=${op}&sort=id&order=${order}&id=${id}|">
+             	<i class="fa fa-sort float-right" aria-hidden="true"></i>
+             	</a>
+             	</th>
+                 <th>Nimi
+                 <a th:href="|/${geturl}?op=${op}&sort=name&order=${order}&id=${id}|">
+                 <i class="fa fa-sort float-right" aria-hidden="true"></i></a>
+                 </th>
+                 <th>Ribakood
+                 <a th:href="|/${geturl}?op=${op}&sort=barcode&order=${order}&id=${id}|">
+                 <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                 </a>
+                 </th>
+                 <th>Baashind EUR
+                 <a th:href="|/${geturl}?op=${op}&sort=baseprice&order=${order}&id=${id}|">
+                 <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                 </a>
+                 </th>
+                 <th>V&auml;ljalaske kuup&auml;ev
+                 <a th:href="|/${geturl}?op=${op}&sort=releasedate&order=${order}&id=${id}|">
+                 <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                 </a>
+                 </th>                        
+                 <th style="text-align:center">...</th>
+             </tr>
+         </thead>
+         <tbody>
+             <tr th:each="product : ${products}">
+                 <td style="text-align:center" th:text="${product.id}"></td>
+                 <td><label href="#" th:text="${product.name}" data-toggle="tooltip" data-placement="bottom" th:title="${product.description}"></label></td>
+                 <td th:text="${product.barcode}"></td>
+                 <td th:text="${#numbers.formatDecimal(product.baseprice,'#0','NONE',2,'POINT')}"></td>
+                 <td th:text="${#dates.format(product.releasedate,'dd.MM.yyyy')}"></td>                        
+                 <td style="text-align:center">
+                  <th:block th:if="${op}=='sor'" >
+                  	<a th:href="|/products?op=sel&id=${product.id}|" class="btn btn-primary btn-sm">Muuda</a>
+                  </th:block>
+                  <th:block th:if="${op}==2" >
+                  	<a th:href="|/neworder?op=3&tid=${product.id}&id=${id}|" class="btn btn-primary btn-sm">Vali</a>
+                  </th:block>
+                 </td>
+             </tr>                    
+         </tbody>
+     </table>
+    </div>
+ </div>

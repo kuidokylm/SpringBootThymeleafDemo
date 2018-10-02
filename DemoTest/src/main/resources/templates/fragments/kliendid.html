@@ -1,0 +1,80 @@
+ <!-- https://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html#parameterizable-fragment-signatures -->
+ <div class="row" xmlns:th="http://www.thymeleaf.org" th:fragment="input(clients,kontent)">
+ 	 <div class="col-sm-9 offset-sm-1">
+	     <!-- <form th:action="|/${geturl}/otsi|" th:object="${kontent}" method="post"> -->
+	     <form th:action="${geturl}=='customers' ? @{/customers/otsi} : @{/neworder/otsi?op=0}" th:object="${kontent}" method="post">
+		  <div class="input-group">	
+		    <th:block th:if="${geturl}=='neworder'">
+			  	<div class="input-group-prepend">
+	    			<span class="input-group-text">Kliendi valimine</span>
+	  			</div>		  	
+  			</th:block>
+		  	<input th:field="*{content}" type="text" class="form-control" id="colFormNimi" placeholder="Kliendi nimi, aadress, telefon, isikukood v&otilde;i riik">
+		  	<button type="submit" class="btn btn-primary">Otsi klienti</button>
+		  	<!-- <div role="alert" class="h-50 alert alert-danger" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></div> -->
+		  </div>  
+	   	 </form>         
+     </div>
+     
+     <div class="col-sm-12 table-responsive">
+     <table id="clientTable" class="table table-striped table-hover table-sm">
+         <thead>
+             <tr>
+             	<th style="text-align:center">ID
+             	<a th:href="|/${geturl}?op=${op}&sort=id&order=${order}&id=${id}&sisu=${sisu}|">
+             	<i class="fa fa-sort float-right" aria-hidden="true"></i>
+             	</a>
+             	</th>
+                 <th>Eesnimi
+	                 <a th:href="|/${geturl}?op=${op}&sort=firstname&order=${order}&id=${id}&sisu=${sisu}|">
+	                 <i class="fa fa-sort float-right" aria-hidden="true"></i></a>
+                 </th>
+                 <th>Perekonnanimi
+	                 <a th:href="|/${geturl}?op=${op}&sort=lastname&order=${order}&id=${id}&sisu=${sisu}|">
+	                 <i class="fa fa-sort float-right" aria-hidden="true"></i></a>
+                 </th>
+                 <th>Address
+                 <a th:href="|/${geturl}?op=${op}&sort=address&order=${order}&id=${id}&sisu=${sisu}|">
+                 <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                 </a>
+                 </th>
+                 <th>Telefon
+                 <a th:href="|/${geturl}?op=${op}&sort=phone&order=${order}&id=${id}&sisu=${sisu}|">
+                 <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                 </a>
+                 </th>
+                 <th>Iskukood
+                 <a th:href="|/${geturl}?op=${op}&sort=secnumber&order=${order}&id=${id}&sisu=${sisu}|">
+                 <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                 </a>
+                 </th>                        
+                 <th>Riik
+                 <a th:href="|/${geturl}?op=${op}&sort=countryname&order=${order}&id=${id}&sisu=${sisu}|">
+                 <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                 </a>
+                 </th>
+                 <th style="text-align:center">...</th>
+             </tr>
+         </thead>
+         <tbody>
+             <tr th:each="client : ${clients}">
+                 <td style="text-align:center" th:text="${client.id}"></td>
+                 <td th:text="${client.firstname}"></td>
+                 <td th:text="${client.lastname}"></td>
+                 <td th:text="${client.address}"></td>
+                 <td th:text="${client.phone}"></td>
+                 <td th:text="${client.secnumber}"></td>
+                 <td th:text="${client.countryname}"></td>
+                 <td style="text-align:center">
+                  	<th:block th:if="${op}=='sor'">
+                  		<a th:href="|/customers?op=sel&id=${client.id}&sisu=${sisu}|" class="btn btn-primary btn-sm">Muuda</a>
+                  	</th:block>
+                 	<th:block th:if="${op}=='0'">  <!-- op=1, läheme järgmise sammu peal tellimises -->
+                  		<a th:href="|/neworder?op=1&id=${client.id}|" class="btn btn-primary btn-sm">Vali</a>
+                  	</th:block>
+                 </td>
+             </tr>
+         </tbody>
+     </table>
+     </div>
+ </div>

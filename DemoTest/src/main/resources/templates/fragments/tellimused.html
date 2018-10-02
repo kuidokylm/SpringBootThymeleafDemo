@@ -1,0 +1,72 @@
+<!-- https://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html#parameterizable-fragment-signatures -->
+ <div class="row" xmlns:th="http://www.thymeleaf.org" th:fragment="input(orders)">
+ 	<div class="col-sm-12 table-responsive">
+     <table id="orderTable" class="table table-striped table-hover table-sm">
+         <thead>
+             <tr>
+             	<th style="text-align:center">ID
+             	<a th:href="|/${geturl}?op=${op}&sort=id&order=${order}&id=${id}|">
+             	<i class="fa fa-sort float-right" aria-hidden="true"></i>
+             	</a>
+             	<th>Kuup&auml;ev
+             	<a th:href="|/${geturl}?op=${op}&sort=transactiondate&order=${order}&id=${id}|">
+             	<i class="fa fa-sort float-right" aria-hidden="true"></i>
+             	</a>
+             	</th>
+              	 <th:block th:if="${id}=='0'">
+	                 <th>Eesnimi
+	                 <a th:href="|/${geturl}?op=${op}&sort=firstname&order=${order}&id=${id}|">
+	                 <i class="fa fa-sort float-right" aria-hidden="true"></i></a>
+	                 </th>
+	                 
+	                 <th>Perekonnanimi
+	                 <a th:href="|/${geturl}?op=${op}&sort=lastname&order=${order}&id=${id}|">
+	                 <i class="fa fa-sort float-right" aria-hidden="true"></i>
+	                 </a>
+	                 </th>
+                 </th:block>
+                 <th>Kauba nimi
+                 <a th:href="|/${geturl}?op=${op}&sort=name&order=${order}&id=${id}|">
+                 <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                 </a>
+                 </th>
+                 <th>Kogus
+                 <a th:href="|/${geturl}?op=${op}&sort=amount&order=${order}&id=${id}|">
+                 <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                 </a>
+                 </th>
+                 <th>Hind kokku
+                 <a th:href="|/${geturl}?op=${op}&sort=cpprice&order=${order}&id=${id}|">
+                 <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                 </a>
+                 </th>                        
+                 <th>Valuuta
+                 <a th:href="|/${geturl}?op=${op}&sort=currency&order=${order}&id=${id}|">
+                 <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                 </a>
+                 </th>
+                 <th>Kurss
+                 <a th:href="|/${geturl}?op=${op}&sort=currencyrate&order=${order}&id=${id}|">
+                 <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                 </a>
+                 </th>
+             </tr>
+         </thead>
+         <tbody>
+             <tr th:each="tell : ${orders}">
+                 <td style="text-align:center" th:text="${tell.id}"></td>
+                 <td th:text="${#dates.format(tell.transactiondate,'dd.MM.yyyy')}"></td>
+                 <th:block th:if="${id}=='0'">                 
+	                 <td th:text="${tell.firstname}"></td>
+	                 <td th:text="${tell.lastname}"></td>
+                 </th:block>
+                 <td th:text="${tell.name}"></td>
+                 <td th:text="${#numbers.formatDecimal(tell.amount,'#0','NONE',2,'POINT')}"></td>                 
+                 <td th:text="${#numbers.formatDecimal(tell.cpprice,'#0','NONE',2,'POINT')}"></td>
+                 <td th:text="${tell.currency}"></td>
+                 <td th:text="${tell.currencyrate}"></td>
+             </tr>
+         </tbody>
+     </table>
+     </div>
+ </div>

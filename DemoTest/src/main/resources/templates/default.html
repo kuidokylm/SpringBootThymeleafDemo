@@ -1,0 +1,223 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<th:block th:include="fragments/header.html"></th:block>
+<body>
+<th:block th:include="fragments/menu.html"></th:block>
+<div class="container-fluid">
+	<th:block th:include="fragments/viga.html"></th:block>
+</div>
+<div class="container">
+<h3>Teema</h3>
+Näidisrakendus: kliendid, tooted, tellimine. Kliendil on riik, mille valuutas temale tooteid müüakse. Valuuta kurssi käiakse küsimas free.currencyconverterapi.com
+
+<h3>Juhend</h3>
+Buildimine: Eclipse Run As ->  Spring Boot App<p />
+Käivitamine: http://localhost:8080/default<p />
+Eclipse projekt importimine: File  -> Import -> Maven -> Existing Maven project<p />
+Eclipse Maven Build: Run As -> Run Configurations-> Maven Build -> Goals:clean install
+
+<hr/>
+Kuna projekt ei ole seatud ülesse, nii, et @SpringBootApplication on projekti juurikas ja alamkaustades on ülejäänud osad, siis põhiklassis DemoTestApplication.java, 
+kus rakendus käima läheb, siis selleks dependency injectioni jaoks, et
+<p/> 
+@Autowired
+<p/>
+CountryJdbcRepository repo;
+<p/> 
+käima läheksid tuleb scanBasePackages lisada annotatsiooni <p/>
+@SpringBootApplication(scanBasePackages = {"com.example.repository","com.example.demo"})
+<hr />
+<h4>HSQL algandmed</h4>
+Laaditakse skriptist data.sql, asub /src/main/resources kataloogis
+<h4>Veatöötlus ja sisendi valideerimine</h4>
+Tehakse vastava java beani klassi annotatsioonide vastu<p />
+
+Toote välja laskmise kuupäev private Date releasedate, annotatsioonid määravad, et kuupäev peab olema ja ei tohi olla tulevikus <p/>
+
+
+<h5>ProductsController.java</h5>
+
+...<p/>
+
+@NotNull(message="Kuupäev peab olema")<p/>	
+@DateTimeFormat(pattern = "dd.MM.yyyy") <p/>
+@PastOrPresent(message = "Kuupäev ei saa olla tulevikus")<p/>
+private Date releasedate;<p/>
+
+
+<h5>Products.html</h5>
+
+&lt;th:block th:include="fragments/viga.html"&gt;&lt;/th:block&gt;
+<p/>
+
+&lt;div class="form-group row"&gt;
+   &lt;label for="colFormBarAeg" class="col-sm-2 col-form-label"&gt;V&amp;auml;ljalaske kuup&amp;auml;ev&lt;/label&gt;
+   &lt;div class="col-sm-10"&gt;
+     &lt;input th:field="*{releasedate}" type="text" class="form-control" id="colFormBarAeg" placeholder="kk.pp.aaaa"&gt;
+     &lt;div role="alert" class="h-50 alert alert-danger" th:if="${#fields.hasErrors('releasedate')}" th:errors="*{releasedate}"&gt;&lt;/div&gt;
+   &lt;/div&gt;
+ &lt;/div&gt;
+<p/>
+
+ProductsController.java olevad veateated, mis tekivad products.html formi valideerimisest, formi sisestusväljad mapitakse th:object="${product}, kus
+mappimine toimus kontrolleris productspost(@Valid @ModelAttribute("product") Product toode, ..
+
+<p /> ja kui on vigane sisend siis neid tuvastab BindingResult ja näidatakse<p/>
+th:if="${#fields.hasErrors('releasedate')}" th:errors="*{releasedate}"
+
+ 
+<p/>
+&lt;form action="#" th:action="@{/products?op=sel}" th:object="${product}" method="post"&gt;
+<p/>
+
+Formi andmed saadetakse töötlemisse th:action="@{/products?op=sel}" kontrollerisse,kus on @PostMapping(value= {"/products"})
+
+<h5>ProductsController.java</h5>
+
+@PostMapping(value= {"/products"}) //@ModelAttribute is bound to the incoming form content
+    public String productspost(@Valid @ModelAttribute("product") Product toode, BindingResult bindingResult, 
+    		Model model,@RequestParam(value = "op", required = true, defaultValue = "0") String[] Op
+			,@RequestParam(value = "id", required = true, defaultValue = "0") Long[] Id)
+			@PostMapping(value= {"/products"}) //@ModelAttribute is bound to the incoming form content
+    public String productspost(@Valid @ModelAttribute("product") Product toode, BindingResult bindingResult, 
+    		Model model,@RequestParam(value = "op", required = true, defaultValue = "0") String[] Op
+			,@RequestParam(value = "id", required = true, defaultValue = "0") Long[] Id)
+ <p />
+ ...
+ <p />
+ 
+ Iga põhiveebilehe päises on Thymeleaf fragment fragments/viga.html
+ 
+ Kui on andmete mappimisel viga, siis moodustatakse veateatest string, mis lisatakse Modeli attribuuti "viga"
+ <p/>model.addAttribute("viga", err); ja viga.html fragment kontrollib muutuja "viga olemasolu, ja kui on kontroll, siis näitab seda.
+ <p/>
+ Et vigu ei tuleks topelt ekraanile, aiis päisesse (viga.html fragmenti) kui ka sisestuskasti alla , siis Utils.veateade(bindingResult.getFieldErrors() ei võta neid
+ veateateid sisse, mis on põhjustatud annotatsioonidest<p/>
+ ArrayList<String> vead = new ArrayList<String>(Arrays.asList("Size", "NotNull","NotBlank","PastOrPresent","PositiveOrZero","Max")); 
+ <p/>
+ 
+ 
+ 
+ 
+ 
+ 
+ if (bindingResult.hasErrors()) {
+    		System.out.println("BINDING RESULT ERROR productspost");
+    		String err=Utils.veateade(bindingResult.getFieldErrors());
+    	    if (!err.equals(""))
+    	    {
+    	    	model.addAttribute("viga", err);
+    	    }
+    	    products= repo.selectAllProducts();
+    	    model.addAttribute("products", products);
+    		return "products";
+    	}
+<p />
+
+
+<h4>Veebilehe struktuur ja Thymeleaf fragmendid</h4>
+
+
+Veebilehed default.html, orders.html, neworder.html, products.html, customers.html on struktuuriga
+<p/>
+<p/>
+fragments/header.html<p/>
+fragments/menu.html<p/>
+fragments/viga.html<p/>
+veebilehe sisu ja muud fragmendid, mida näidatakse vastavalt parameetrite olemasolule või nende väärtustele  th:block th:unless <p/>
+fragments/footer.html<p/>
+
+Kasutatakse Bootstrap4 kaskaadistiile koos jQueryga<p />
+<p />
+
+
+
+
+&lt;!DOCTYPE HTML&gt;<p />
+&lt;html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml"&gt;<p />
+&lt;th:block th:include="fragments/header.html"&gt;&lt;/th:block&gt;<p />
+&lt;body xmlns:th="http://www.thymeleaf.org" &gt;<p />
+	&lt;th:block th:include="fragments/menu.html"&gt;&lt;/th:block&gt;<p />
+    &lt;div class="container" &gt;    	  <p />
+        &lt;div class="page-title"&gt;<p />
+            &lt;h2&gt;Tellimused&lt;/h2&gt;<p />
+             &lt;th:block th:unless="${id}=='0'"&gt;<p />
+        		&lt;label th:replace="fragments/yksklient.html :: input(*{client})"&gt;&lt;/label&gt;<p />
+        	&lt;/th:block&gt;<p />
+        &lt;/div&gt;<p />
+        &lt;th:block th:include="fragments/viga.html"&gt;&lt;/th:block&gt;<p />
+		&lt;p/&gt;        <p />
+
+		&lt;div th:replace="fragments/tellimused.html :: input(*{orders})"&gt;&lt;/div&gt;<p /> 
+		
+     &lt;/div&gt;<p />
+&lt;/body&gt;<p />
+&lt;th:block th:include="fragments/footer.html"&gt;&lt;/th:block&gt;<p />
+&lt;/html
+
+
+<h4>Andmevahetus veebilehe ja andmebaasi vahel läbi kontrollerite</h4>
+
+POST päringud<p />
+th:action="@{/products?op=sel}" th:object="${product}" method="post"
+<p/>
+GET päringud<p />
+th:href="|/${geturl}?op=${op}&amp;sort=barcode&amp;order=${order}&amp;id=${id}|"
+<p/>
+
+Mapitakse kontrolleritesse<p/>
+@PostMapping(value= {"/products"}) //@ModelAttribute is bound to the incoming form content
+public String productspost(@Valid @ModelAttribute("product") Product toode, BindingResult bindingResult, 
+ 		Model model,@RequestParam(value = "op", required = true, defaultValue = "0") String[] Op
+	,@RequestParam(value = "id", required = true, defaultValue = "0") Long[] Id)
+<p />
+Formi väärtused @Valid @ModelAttribute("product") Product toode
+<p />
+Parameetrid @RequestParam(value = "id", required = true, defaultValue = "0") Long[] Id
+<p />
+Massiivid on kasutusel HTTP parameter pollution ründe tõrjeks Long[] Id
+<p />
+Kui kontrollerist vaja saata midagi tagasi veebilehele, siis mapitakse Model objekti külge
+<p/>
+model.addAttribute("products", products);<p/>
+model.addAttribute("product", product);<p/>
+return "products"; //products.html <p/>
+
+<h5>Veebilehel mappimine HTML elemendiks Thymeleaf th:text="${product.name}" </h5>
+<p/>
+Kui kasutusel on Thymeleaf fragmendid, näietks neworder.html kasutab fragments/yksklient.html<p/>
+&lt;div th:replace="fragments/kliendid.html :: input(*{clients},*{kontent})"&gt;&lt;/div&gt;
+<p/>
+Siis kontrolleris mapid objektid või muutujad külge<p/>
+
+Product product=new Product();<p/> 
+product.setId(0L);<p/>
+model.addAttribute("product", product);<p/>
+Content kontent = new Content("");<p/>
+model.addAttribute("kontent", kontent);<p/>
+return "neworder";<p/>
+
+ja fragmendis fragments/yksklient.html võtab objektid vastu põhilehelt<p/>
+th:fragment="input(client)" th:field="*{client}" <p />
+ja mapid HTML elementide külge<p/>
+&lt;label th:text="${client.address}"&gt;&lt;/label&gt;
+
+
+<h5>Muutujate kasutamise s&uuml;ntaksi näited</h5>
+th:action="@{|/neworder?op=4&id=${tellimus.clientid}&tid=${tellimus.productid}|}"<p/>
+th:href="|/${geturl}?op=${op}&amp;sort=releasedate&amp;order=${order}&amp;id=${id}|"<p/>
+<hr />
+&lt;th:block th:if="${op}=='4'"&gt;<p/>
+   &lt;label th:replace="fragments/ykstoode.html :: input(*{product})"&gt;&lt;/label&gt;<p/>
+&lt;/th:block&gt;<p/>
+
+<p />
+th:action="|/${geturl}/otsi|" th:object="${kontent}"<p />
+
+H&uuml;pikmen&uuml;&uuml; vaikimisi valitud element <p/>
+th:selected="${country.countryname} == ${client.countryname}"
+
+</div>
+</body>
+<th:block th:include="fragments/footer.html"></th:block>
+</html>

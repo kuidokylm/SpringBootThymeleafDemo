@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<th:block th:include="fragments/header.html"></th:block>
+<body xmlns:th="http://www.thymeleaf.org" >
+	<th:block th:include="fragments/menu.html"></th:block>
+    <div class="container" >      
+        <div class="page-title">
+            <h2>Uus tellimus</h2>
+            <th:block th:if="${op}>='2'">
+        		<label th:replace="fragments/yksklient.html :: input(*{client})"></label>
+        	</th:block>
+        	<th:block th:if="${op}=='4'">
+        		<label th:replace="fragments/ykstoode.html :: input(*{product})"></label>
+        	</th:block>
+        	<hr />
+        </div>
+        <th:block th:include="fragments/viga.html"></th:block>
+        <th:block th:if="${op}==0">      
+        	<div th:replace="fragments/kliendid.html :: input(*{clients},*{kontent})"></div> 
+        </th:block>
+        <p/>        
+		<th:block th:if="${op}=='2'">  <!-- klient on valitud valida tuleb toode -->
+			<h3>Vali toode</h3>
+			<div th:replace="fragments/tooted.html :: input(*{products})"></div> 
+		</th:block>        
+		<th:block th:if="${op}=='4'">     
+		<div class="row"> 
+		<div class="col-sm-8 offset-sm-1"> 
+        <form action="#" th:action="@{|/neworder?op=4&id=${tellimus.clientid}&tid=${tellimus.productid}|}" th:object="${tellimus}" th:field="${tellimus}" method="post">
+        
+          <div class="form-group row">
+		    <label for="colFormValuuta" class="col-sm-3 col-form-label">Valuuta kurss</label>
+		    <div class="col-sm-9">
+		      <input th:field="*{currencyrate}" type="text" readonly class="form-control" id="colFormValuuta" placeholder="Valuuta kurss">	
+		      <div role="alert" class="h-50 alert alert-danger" th:if="${#fields.hasErrors('currencyrate')}" th:errors="*{currencyrate}"></div>	      
+		    </div>
+		  </div>
+		  <div class="form-group row">
+		    <label for="colFormKogus" class="col-sm-3 col-form-label">Kogus</label>
+		    <div class="col-sm-9">
+		      <input th:field="*{amount}" type="text" class="form-control" id="colFormKogus" placeholder="Kogus">
+		      <div role="alert" class="h-50 alert alert-danger" th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"></div>	      
+		    </div>
+		  </div>
+		  <div class="form-group row" >
+		    <label for="colFormPrice" class="col-sm-3 col-form-label">Tüki hind <label th:text="${valuuta}"></label>
+		    </label>
+		    <!-- <label th:field="*{currency}"></label> -->
+		    <div class="col-sm-9">
+		      <input th:field="*{cpprice}" type="text" class="form-control" id="colFormPrice" placeholder="Hind kohalikus valuutas">
+		      <div role="alert" class="h-50 alert alert-danger" th:if="${#fields.hasErrors('cpprice')}" th:errors="*{cpprice}"></div>
+		    </div>
+		  </div>
+		  <div class="form-group row">
+		    <label for="colFormBarAeg" class="col-sm-3 col-form-label">Kuup&auml;ev</label>
+		    <div class="col-sm-9">
+		      <input th:field="*{transactiondate}" type="text" class="form-control" id="colFormBarAeg" placeholder="kk.pp.aaaa">
+		      <div role="alert" class="h-50 alert alert-danger" th:if="${#fields.hasErrors('transactiondate')}" th:errors="*{transactiondate}"></div>
+		    </div>
+		  </div>
+		  <!-- kui input on disabled, siis th:field="*{firstname}" selline mapping ei tööta -->
+		  <button class="btn btn-secondary" type="submit">Salvesta</button>
+		  
+		  <!-- kui input on disabled siis ei mapita, readonly mapitakse
+		  <input th:field="*{currencyrate}" type="hidden"> -->
+		  <input th:field="*{clientid}" type="hidden">
+		  <input th:field="*{productid}" type="hidden">
+		  		  
+		</form>
+		</div>
+		</div>
+		</th:block>    
+     </div>
+</body>
+<th:block th:include="fragments/footer.html"></th:block>
+</html>

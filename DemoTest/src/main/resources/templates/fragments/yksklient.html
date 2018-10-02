@@ -1,0 +1,22 @@
+<div class="row row-content" xmlns:th="http://www.thymeleaf.org" id="yksklient" th:fragment="input(client)" th:field="*{client}">
+	<div class="col-sm-9">
+		<div class="table-responsive-sm">
+		  <table class="table">
+		    <tbody>
+			    <tr>
+			      <td><label th:text="${client.firstname}"></label></td>
+			      <td><label th:text="${client.lastname}"></label> (ID: <label th:text="${client.id}"></label>)</td>
+			      <td><label th:text="${client.secnumber}"></label></td>
+			      <td><label th:text="${client.address}"></label></td>
+			      <td>Tel. <label th:text="${client.phone}"></label></td>
+			      <td><label th:text="${client.countryname}"></label></td>
+			      <th:block th:if="${geturl}=='neworder'">
+				      <td><a th:href="|/orders?id=${client.id}|" class="btn btn-primary btn-sm">Kliendi varasemad tellimused</a>
+				      </td>
+			      </th:block>
+			    </tr>
+			  </tbody>
+		  </table>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<th:block th:include="fragments/header.html"></th:block>
+<body xmlns:th="http://www.thymeleaf.org" >
+	<th:block th:include="fragments/menu.html"></th:block>
+    <div class="container" >    	  
+        <div class="page-title">
+            <h2>Tellimused</h2>
+             <th:block th:unless="${id}=='0'">
+        		<label th:replace="fragments/yksklient.html :: input(*{client})"></label>
+        	</th:block>
+        </div>
+        <th:block th:include="fragments/viga.html"></th:block>
+		<p/>        
+
+		<div th:replace="fragments/tellimused.html :: input(*{orders})"></div> 
+		
+     </div>
+</body>
+<th:block th:include="fragments/footer.html"></th:block>
+</html>

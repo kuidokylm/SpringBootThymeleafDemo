@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<th:block th:include="fragments/header.html"></th:block>
+<body xmlns:th="http://www.thymeleaf.org" >
+	<th:block th:include="fragments/menu.html"></th:block>
+    <div class="container">    	  
+        <div class="page-title">
+            <h2>Tooted</h2>
+        </div>
+        <th:block th:include="fragments/viga.html"></th:block>
+        <!-- th:object="${product}" on ProductsController.java product((@ModelAttribute("product") Product toode, -->       
+        <form action="#" th:action="@{/products?op=sel}" th:object="${product}" method="post">
+		  <div class="form-group row">
+		    <label for="colFormNimi" class="col-sm-2 col-form-label">Nimi</label>
+		    <div class="col-sm-10">
+		      <input th:field="*{name}" type="text" class="form-control" id="colFormNimi" placeholder="Toote nimi">	
+		      <div role="alert" class="h-50 alert alert-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>	      
+		    </div>
+		  </div>
+		  <div class="form-group row">
+		    <label for="colFormBarcode" class="col-sm-2 col-form-label">Ribakood</label>
+		    <div class="col-sm-10">
+		      <input th:field="*{barcode}" type="text" class="form-control" id="colFormBarcode" placeholder="Ribakood">
+		      <div role="alert" class="h-50 alert alert-danger" th:if="${#fields.hasErrors('barcode')}" th:errors="*{barcode}"></div>
+		    </div>
+		  </div>
+		  <div class="form-group row">
+		    <label for="colFormBarAeg" class="col-sm-2 col-form-label">V&auml;ljalaske kuup&auml;ev</label>
+		    <div class="col-sm-10">
+		      <input th:field="*{releasedate}" type="text" class="form-control" id="colFormBarAeg" placeholder="kk.pp.aaaa">
+		      <div role="alert" class="h-50 alert alert-danger" th:if="${#fields.hasErrors('releasedate')}" th:errors="*{releasedate}"></div>
+		    </div>
+		  </div>
+		  
+		  <div class="form-group row">
+		    <label for="colFormDescription" class="col-sm-2 col-form-label">Kirjeldus</label>
+		    <div class="col-sm-10">
+		      <textarea th:field="*{description}" rows="4" class="form-control" id="colFormDescription" placeholder="Toote kirjeldus"></textarea>
+		      <div role="alert" class="h-50 alert alert-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+		    </div>
+		  </div>
+		  <div class="form-group row">
+		    <label for="colFormBaseprice" class="col-sm-2 col-form-label">Baashind EUR</label>
+		    <div class="col-sm-10">
+		      <input th:field="*{baseprice}" type="text" class="form-control" id="colFormBaseprice" placeholder="Hind EUR">
+		      <div role="alert" class="h-50 alert alert-danger" th:if="${#fields.hasErrors('baseprice')}" th:errors="*{baseprice}"></div>
+		    </div>
+		  </div>
+		  <input th:value="${product.id}" th:field="*{id}" type="hidden">
+		  <button class="btn btn-secondary" th:text="${product.id} ? 'Salvesta' : 'Lisa uus toode'" type="submit"></button>
+		</form>        
+		<p/>        
+
+		<div th:replace="fragments/tooted.html :: input(*{products})"></div> 
+		
+     </div>
+</body>
+<th:block th:include="fragments/footer.html"></th:block>
+</html>

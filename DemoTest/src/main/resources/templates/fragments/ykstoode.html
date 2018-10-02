@@ -1,0 +1,16 @@
+<div class="row row-content" xmlns:th="http://www.thymeleaf.org" id="ykstoode" th:fragment="input(product)" th:field="*{product}">
+	<div class="col-sm-9">
+		<div class="table-responsive-sm">
+		  <table class="table">
+		    <tbody>
+			    <tr>
+			      <td><label th:text="${product.name}"></label> (ID: <label th:text="${product.id}"></label>)</td>
+			      <td>Ribakood: <label th:text="${product.barcode}"></label></td>
+			      <td><label th:text="${product.baseprice}"></label> EUR</td>
+			      <td><label th:text="${product.description}"></label></td>
+			    </tr>
+			  </tbody>
+		  </table>
+		</div>
+	</div>
+</div>
