@@ -24,19 +24,19 @@ kus rakendus käima läheb, siis selleks dependency injectioni jaoks, et
 <p/>
 CountryJdbcRepository repo;
 <p/> 
-käima läheksid tuleb scanBasePackages lisada annotatsiooni <p/>
+käima läheksid tuleb scanBasePackages lisada annotatsioonid<p/>
 @SpringBootApplication(scanBasePackages = {"com.example.repository","com.example.demo"})<p />
 public class DemoTestApplication
 <hr />
-<h4>HSQL algandmed</h4>
+<h4>HSQL algandmed in-memory andmebaasi jaoks</h4>
 Laaditakse skriptist data.sql, asub /src/main/resources kataloogis
 <h4>Veatöötlus ja sisendi valideerimine</h4>
-Tehakse vastava java beani klassi annotatsioonide vastu<p />
+Tehakse vastava Java beani klassi annotatsioonide vastu<p />
 
 Toote välja laskmise kuupäev private Date releasedate, annotatsioonid määravad, et kuupäev peab olema ja ei tohi olla tulevikus <p/>
 
 
-<h5>ProductsController.java</h5>
+<h5>Products.java</h5>
 
 ...<p/>
 
