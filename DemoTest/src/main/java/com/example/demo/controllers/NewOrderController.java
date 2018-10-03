@@ -114,7 +114,7 @@ public class NewOrderController {
 			{				
 				product=repo.findByIdProduct(Tid[0]);
 				tellimus.setProductid(Tid[0]);
-				tellimus.setCpprice(product.getBaseprice()*rate);
+				tellimus.setCpprice(product.getBaseprice()/rate);
 				tellimus.setAmount(1.0f);				
 		        Calendar cal = Calendar.getInstance();
 		        tellimus.setTransactiondate(cal.getTime());
