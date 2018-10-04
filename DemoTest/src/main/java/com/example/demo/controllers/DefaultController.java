@@ -16,7 +16,7 @@ public class DefaultController {
 	@Autowired
 	CountryJdbcRepository repo;
 	
-	@GetMapping(value= {"/","/default"})  
+	@GetMapping(value= {"/","/default"})  // käivitamiseks kas http://localhost:8080 või http://localhost:8080/default
 	public String vaikimisi(Model model,@RequestParam(value = "op", required = true, defaultValue = "0") String[] Op
 			,@RequestParam(value = "id", required = true, defaultValue = "0") Long[] Id) {
 		try
