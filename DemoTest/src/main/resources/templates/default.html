@@ -215,6 +215,12 @@ th:action="|/${geturl}/otsi|" th:object="${kontent}"<p />
 H&uuml;pikmen&uuml;&uuml; vaikimisi valitud element <p/>
 th:selected="${country.countryname} == ${client.countryname}"
 
+
+<h5>Kuupäeva formaatimine</h5>
+Thymeleaf: th:text="${#dates.format(tell.transactiondate,'dd.MM.yyyy')}"  <p/>
+Java annotation: @DateTimeFormat(pattern = "dd.MM.yyyy") <p />
+
+
 </div>
 </body>
 <th:block th:include="fragments/footer.html"></th:block>
