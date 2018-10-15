@@ -10,7 +10,7 @@ insert into Country (currency, countryname) values('EUR', 'Eesti');
 
 insert into Client (id,address,countryname, firstName, lastName,phone,secnumber) values(1,'Uppsala','Rootsi','Olle', 'Svensson','253725283','762357252');
 insert into Client (id,address,countryname, firstName, lastName,phone,secnumber) values(2,'Poznan','Poola','Gzrzegozs', 'Zvyblwzki','9235823','2834737883');
-insert into Client (id,address,countryname, firstName, lastName,phone,secnumber) values(3,'Krakow','Poola','Jyszctuna', 'Kowalscyk','287428',' 234725472');
+insert into Client (id,address,countryname, firstName, lastName,phone,secnumber) values(3,'Krakow','Poola','Jyszctuna', 'Kowalscyk','287428','234725472');
 insert into Client (id,address,countryname, firstName, lastName,phone,secnumber) values(4,'Copenhagen','Taani','Harald', 'Hokennson','3482424','982345825842');
 insert into Client (id,address,countryname, firstName, lastName,phone,secnumber) values(5,'Oulu','Soome','Pekka', 'Velimäkki','3582538424','925283443');
 insert into Client (id,address,countryname, firstName, lastName,phone,secnumber) values(6,'Pärnu','Eesti','Jaak', 'Tamm','825234424','98273462342');

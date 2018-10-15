@@ -40,7 +40,7 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
+			<scope>runtime</scope>  <!-- The runtime scope also makes the artifact available on the test classpath -->
 		</dependency>
 		<dependency>
 			<groupId>org.hsqldb</groupId>
