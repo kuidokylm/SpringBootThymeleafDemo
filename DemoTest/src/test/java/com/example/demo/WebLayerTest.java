@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -18,7 +19,8 @@ import com.example.demo.controllers.TestController;
 //https://spring.io/guides/gs/testing-web/
 // ei tõmba veebi serverit käima
 @RunWith(SpringRunner.class)
-@WebMvcTest(TestController.class) //ainult seal kontrollestist
+//@ComponentScan("com.example.demo.services")
+@WebMvcTest(TestController.class) //ainult seal kontrollerist
 public class WebLayerTest {
 	
 	@Autowired
