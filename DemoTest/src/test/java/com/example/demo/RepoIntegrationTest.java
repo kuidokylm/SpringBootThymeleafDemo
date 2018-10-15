@@ -15,6 +15,14 @@ import com.example.demo.dto.Client;
 import com.example.repository.CountryJdbcRepository;
 
 //https://www.baeldung.com/spring-boot-testing
+//@ComponentScan on vaja lisada selle vea pärast Unit tetsil
+/*
+Error creating bean with name 'com.example.demo.RepoIntegrationTest': Unsatisfied dependency expressed 
+through field 'repo'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: 
+No qualifying bean of type 'com.example.repository.CountryJdbcRepository' available: expected at least 
+1 bean which qualifies as autowire candidate. Dependency annotations: 
+{@org.springframework.beans.factory.annotation.Autowired(required=true)}
+*/
 
 @ComponentScan("com.example.repository")
 @RunWith(SpringRunner.class)
