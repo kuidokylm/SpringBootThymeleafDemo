@@ -15,7 +15,7 @@ import com.example.demo.dto.Client;
 import com.example.repository.CountryJdbcRepository;
 
 //https://www.baeldung.com/spring-boot-testing
-//@ComponentScan on vaja lisada selle vea pärast Unit tetsil
+//@ComponentScan on vaja lisada selle vea pärast Unit testil
 /*
 Error creating bean with name 'com.example.demo.RepoIntegrationTest': Unsatisfied dependency expressed 
 through field 'repo'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: 
