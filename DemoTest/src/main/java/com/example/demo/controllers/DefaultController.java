@@ -1,6 +1,6 @@
 package com.example.demo.controllers;
 
-
+//Eclipse Run As Spring Boot App
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
