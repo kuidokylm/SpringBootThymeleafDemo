@@ -7,7 +7,7 @@ import javax.faces.bean.SessionScoped;
 import javax.inject.Named;
 
 
-//@ManagedBean(name = "primeBean", eager = true)
+//@ManagedBean(name = "primeBean", eager = true)  //see ei tööta
 @Named("primeBean")
 @SessionScoped  //@ViewScoped
 public class PrimeBean implements Serializable {
