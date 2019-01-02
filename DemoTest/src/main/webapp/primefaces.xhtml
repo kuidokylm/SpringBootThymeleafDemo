@@ -1,0 +1,16 @@
+<f:view xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+  <title>PrimeFaces Hello World Example</title>
+</h:head>
+		
+<h:body>
+	TERE WEBAPP	
+		<th:block th:include="fragments/menu.html"></th:block>	
+		<p:panelGrid columns="2">
+	    	<h:outputText value="#{primeBean.firstName}"/>
+	    	<h:outputText value="#{primeBean.lastName}" />
+		</p:panelGrid>
+		
+</h:body>	
+</f:view>

@@ -1,5 +1,8 @@
 package com.example.demo.controllers;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 //Eclipse Run As Spring Boot App
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,4 +36,11 @@ public class DefaultController {
     }
 
 	
+	@GetMapping(value= {"/primefaces"})  
+	public String primefaces(HttpServletRequest request,
+            HttpServletResponse httpServletResponse) {
+		//return "redirect:" + request.getRequestURL().append(".xhtml").toString();  //ei tööta
+        return "primefaces.xhtml";  
+    }
+
 }
