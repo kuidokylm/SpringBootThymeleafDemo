@@ -86,8 +86,7 @@
  		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
-			<version>4.0.1</version>
-			<scope>provided</scope>
+			<version>2.5</version>
 		</dependency>
 		<!-- Faces Implementation -->
 		<dependency>
@@ -108,12 +107,6 @@
 		    <version>6.2</version>
 		</dependency>
 			
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.5</version>
-		</dependency>
-		
 		<!-- JSTL Library  -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
