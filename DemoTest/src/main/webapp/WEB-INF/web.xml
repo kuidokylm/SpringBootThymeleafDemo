@@ -19,6 +19,7 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns
     <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
     <load-on-startup>1</load-on-startup>
   </servlet>
+  
   <!-- seda pole vaja, selle asemel ServletRegistrationBean<FacesServlet> servletRegistrationBean() -->
   <!-- <servlet-mapping>
     <servlet-name>Faces Servlet</servlet-name>
