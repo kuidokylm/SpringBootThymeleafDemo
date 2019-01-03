@@ -36,8 +36,8 @@ public class DemoTestApplication {
         FacesServlet servlet = new FacesServlet();
         ServletRegistrationBean<FacesServlet> servletRegistrationBean =
           new ServletRegistrationBean<FacesServlet>(servlet, "*.xhtml");
-          //new ServletRegistrationBean(servlet, "*.jsf");
         servletRegistrationBean.setLoadOnStartup(1);
         return servletRegistrationBean;
     }		
+	
 }
