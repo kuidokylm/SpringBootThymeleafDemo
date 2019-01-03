@@ -40,7 +40,7 @@ public class DefaultController {
 	public String primefaces(HttpServletRequest request,
             HttpServletResponse httpServletResponse) {
 		//return "redirect:" + request.getRequestURL().append(".xhtml").toString();  //ei tööta
-        return "primefaces.xhtml";  
+        return "primefacesspringboot";  
     }
 
 }
