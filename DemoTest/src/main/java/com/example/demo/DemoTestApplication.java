@@ -30,6 +30,7 @@ public class DemoTestApplication {
 	}
 	
 
+	// registreerime, et päringud .xhtml failidele lähevad JSF servlettidele töötlemiseks  
 	@Bean
     public ServletRegistrationBean<FacesServlet> servletRegistrationBean() {
         FacesServlet servlet = new FacesServlet();
