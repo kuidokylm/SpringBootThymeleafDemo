@@ -1,7 +1,7 @@
 package com.example.demo;
 
 /*
- * Abiklass otsingute teksti hoidmiseks, mis ekraanilst sesestatakse
+ * Abiklass otsingute teksti hoidmiseks, mis ekraanilt sisestatakse
  */
 public class Content {
 
