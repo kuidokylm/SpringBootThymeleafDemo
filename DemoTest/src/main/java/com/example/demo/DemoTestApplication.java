@@ -31,10 +31,10 @@ public class DemoTestApplication {
 	
 
 	@Bean
-    public ServletRegistrationBean servletRegistrationBean() {
+    public ServletRegistrationBean<FacesServlet> servletRegistrationBean() {
         FacesServlet servlet = new FacesServlet();
-        ServletRegistrationBean servletRegistrationBean =
-          new ServletRegistrationBean(servlet, "*.xhtml");
+        ServletRegistrationBean<FacesServlet> servletRegistrationBean =
+          new ServletRegistrationBean<FacesServlet>(servlet, "*.xhtml");
           //new ServletRegistrationBean(servlet, "*.jsf");
         servletRegistrationBean.setLoadOnStartup(1);
         return servletRegistrationBean;
