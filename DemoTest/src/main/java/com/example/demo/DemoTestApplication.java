@@ -30,7 +30,7 @@ public class DemoTestApplication {
 	}
 	
 
-	// registreerime, et päringud .xhtml failidele lähevad JSF servlettidele töötlemiseks  
+	// registreerime, et päringud .xhtml failidele lähevad JSF servlettidele töötlemiseks  	
 	@Bean
     public ServletRegistrationBean<FacesServlet> servletRegistrationBean() {
         FacesServlet servlet = new FacesServlet();
@@ -39,6 +39,5 @@ public class DemoTestApplication {
           //new ServletRegistrationBean(servlet, "*.jsf");
         servletRegistrationBean.setLoadOnStartup(1);
         return servletRegistrationBean;
-    }	
-	
+    }		
 }
