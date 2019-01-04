@@ -14,6 +14,23 @@ xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/cor
 	<p:panelGrid columns="2">
     	<h:outputText value="#{primeBean.firstName}"/>
     	<h:outputText value="#{primeBean.lastName}" />
-	</p:panelGrid>		
+	</p:panelGrid>
+	
+	<p:commandButton value="Open Dialog" styleClass="btn btn-secondary" icon="ui-icon-note"  onclick="PF('exDialog').show();">
+	</p:commandButton>
+	<p:dialog header="Example dialog" widgetVar="exDialog" minHeight="40">
+    	<h:outputText value="Hello Baeldung!" />
+	</p:dialog>	
+	<h:form>
+	<p:dataTable var="riik" value="#{primeBean.riigid}">		
+	    <p:column headerText="Nimi" sortBy="#{riik.countryname}" >
+	        <h:outputText value="#{riik.countryname}" />
+	    </p:column>
+	 
+	    <p:column headerText="Valuuta" sortBy="#{riik.currency}">
+	        <h:outputText value="#{riik.currency}" />
+	    </p:column>
+	</p:dataTable>
+	</h:form>	
 </h:body>	
 </f:view>
