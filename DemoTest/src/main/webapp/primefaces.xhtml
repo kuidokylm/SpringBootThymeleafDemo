@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <f:view xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
 xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core">
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link type="text/css" rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
+<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
 <h:head>
   <title>PrimeFaces Hello World Example</title>
 </h:head>
 		
 <h:body>
-	TERE primefaces	
-		<th:block th:include="fragments/menu.html"></th:block>	
-		<p:panelGrid columns="2">
-	    	<h:outputText value="#{primeBean.firstName}"/>
-	    	<h:outputText value="#{primeBean.lastName}" />
-		</p:panelGrid>
-		
+	<ui:include src="menu.html"></ui:include>
+	<p:panelGrid columns="2">
+    	<h:outputText value="#{primeBean.firstName}"/>
+    	<h:outputText value="#{primeBean.lastName}" />
+	</p:panelGrid>		
 </h:body>	
 </f:view>

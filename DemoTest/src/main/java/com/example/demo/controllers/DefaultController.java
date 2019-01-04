@@ -36,11 +36,11 @@ public class DefaultController {
     }
 
 	
-	@GetMapping(value= {"/primefaces"})  
-	public String primefaces(HttpServletRequest request,
-            HttpServletResponse httpServletResponse) {
-		//return "redirect:" + request.getRequestURL().append(".xhtml").toString();  //ei tööta
-        return "primefacesspringboot";  
-    }
+//	@GetMapping(value= {"/primefaces"})  
+//	public String primefaces(HttpServletRequest request,
+//            HttpServletResponse httpServletResponse) {
+//		//return "redirect:" + request.getRequestURL().append(".xhtml").toString();  //ei tööta
+//        return "primefacesspringboot";  
+//    }
 
 }
